@@ -47,12 +47,10 @@ for index, denom in reversed(list(enumerate(denoms))):
     # then we can use all of toRemove, else we need
     # round toRemove down to where it is divisible
     toSub = toRemove if toRemove % denom == 0 else toRemove - (toRemove % denom)  
-    print(toSub)
 
     # this finds the number of chips we have to subtract
     # from the result array
     toSub /= denom
-    print(toSub)
     result[index] -= toSub
 
 print("final")
