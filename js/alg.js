@@ -3,7 +3,7 @@ let chips = [
     ["red", 0.05, 75, 0],
     ["blue", 0.1, 75, 0],
     ["green", 0.25, 75, 0],
-    ["white", 0.5, 75, 0],
+    ["white", 0.5, 75, 2],
 ]
 
 function findTotal(result, chips) {
@@ -39,7 +39,7 @@ function algorithm(chips, players, buyIn) {
 
         // if greater than 0 that means we can remove all of this chip type
         if(toRemove - total_denom > 0){
-            result[index] = 0;
+            result[index] = list[3]; // adds the minimum user specified
             continue;
         }
         // if to remove < current denom, don't remove any
@@ -53,7 +53,12 @@ function algorithm(chips, players, buyIn) {
         // round toRemove down to where it is divisible
         let toSub = toRemove % denom == 0 ? toRemove : toRemove - (toRemove % denom);
         toSub /= denom;
-        result[index] -= toSub;
+        result[index] -= toSub; 
+        
+        // makes sure there is a minimum of the user specified amount
+        if(result[index] < list[3]){
+            result[index] = list[3];
+        }
     }
 
     console.log("final");
