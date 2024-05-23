@@ -26,7 +26,7 @@ function algorithm(chips, players, buyIn) {
 
     // if not enough chips return err
     if(total < buyIn){
-        return -1;
+        return [-1, "Error, not enough chips for specified configurations."];
     }
 
     for (let index = chips.length - 1; index > 0; index--) {
@@ -63,6 +63,10 @@ function algorithm(chips, players, buyIn) {
 
     console.log("final");
     console.log(result, findTotal(result, chips));
+
+    if(findTotal(result, chips) != buyIn){
+        return [-1, "Error, configuration doesn't add up to buy in amount"];
+    }
 
 }
 
