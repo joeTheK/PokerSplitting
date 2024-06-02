@@ -1,10 +1,3 @@
-// chips is array of arrays [color, denom, max, min]
-let chips = [
-    ["red", 0.05, 75, 0],
-    ["blue", 0.1, 75, 0],
-    ["green", 0.25, 75, 0],
-    ["white", 0.5, 75, 2],
-]
 
 function findTotal(result, chips) {
     var toReturn = 0;
@@ -29,13 +22,14 @@ function algorithm(chips, players, buyIn) {
         return [-1, "Error, not enough chips for specified configurations."];
     }
 
-    for (let index = chips.length - 1; index > 0; index--) {
+    for (let index = chips.length - 1; index >= 0; index--) {
         const list = chips[index];
         const denom = list[1];
         
         total = findTotal(result, chips);
         let total_denom = result[index] * denom
         let toRemove = total - buyIn;
+        toRemove = toRemove.toFixed(2); // get rif of any weird floating points 
 
         // if greater than 0 that means we can remove all of this chip type
         if(toRemove - total_denom > 0){
@@ -61,13 +55,10 @@ function algorithm(chips, players, buyIn) {
         }
     }
 
-    console.log("final");
-    console.log(result, findTotal(result, chips));
-
     if(findTotal(result, chips) != buyIn){
         return [-1, "Error, configuration doesn't add up to buy in amount"];
     }
 
-}
+    return [0, result];
 
-algorithm(chips, 5, 5);
+}

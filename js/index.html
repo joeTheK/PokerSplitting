@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Site</title>
+    <script type="text/javascript" src="alg.js"></script>
+
+</head>
+<body>
+
+    <script>
+        function doSomething() {
+            var x = document.getElementById("myForm").elements;
+
+            let chips = [
+                ["red", 0.05, Number(x[0].value), 0],
+                ["blue", 0.1, Number(x[1].value), 0],
+                ["green", 0.25, Number(x[2].value), 0],
+                ["white", 0.5, Number(x[3].value), 0],
+            ];
+
+            let result = algorithm(chips,  Number(x[4].value),  Number(x[5].value));
+            console.log(result);
+
+            let resultList = document.getElementById("results");
+            if(result[0] < 0){
+                resultList.innerHTML += "<li>" + result[1] + "</li>";
+            }else{
+                result[1].forEach(element => {
+                    resultList.innerHTML += "<li>" + element + "</li>";
+                });
+            }
+
+            return false;
+        }
+        </script>
+        
+        <p> Put the number of chips you have for each denomination</p>
+        <p> Followed by the number of players and buy in amount</p>
+        <form onsubmit="return doSomething();" id="myForm">
+            0.05: <input type="number"><br>
+            0.10: <input type="number"><br>
+            0.25: <input type="number"><br>
+            0.50: <input type="number"><br>
+            Players: <input type="number"><br>
+            Buy-in : <input type="number"><br>
+            <input type="submit" value="Submit">
+        </form>
+        
+        <div>
+            <p>Results:</p>
+            <ul id="results">
+
+            </ul>
+        </div>
+
+</body>
+</html>
